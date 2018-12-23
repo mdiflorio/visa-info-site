@@ -1,14 +1,25 @@
 .App {
-  margin: 3em 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  h2 {
-    color: white;
-    font-family: "Raleway", sans-serif;
-    font-size: 2em;
-  }
+  .container {
+    max-width: 700px;
+    // min-height: 700px;
+    border-radius: 5px;
+    padding: 3em;
+    margin: 3em;
+    background-color: white;
 
-  .subheader {
-    color: rgba(0, 0, 0, 0.87);
-    font-size: 1em;
+    h2 {
+      color: #ec6f66;
+      font-family: "Raleway", sans-serif;
+      font-size: 2em;
+    }
+
+    .subheader {
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 1em;
+    }
   }
 }
