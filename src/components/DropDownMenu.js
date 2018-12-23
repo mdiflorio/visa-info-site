@@ -1,24 +1,18 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
-// import { countryOptions } from "../common";
-const nationalityOptions = [
-  { key: "af", value: "af", flag: "af", text: "Afghanistan" }
-];
-
-const countryOptions = [
-  { key: "af", value: "af", flag: "af", text: "Afghanistan" }
-];
-
-const DropDownMenu = ({ type, disabled, loading }) => (
-  <Dropdown
-    placeholder={`Select ${type}`}
-    fluid
-    search
-    selection
-    options={type === "Nationality" ? nationalityOptions : countryOptions}
-    disabled={disabled}
-  />
-);
+const DropDownMenu = ({ handleChange, type, data }) => {
+  return (
+    <Dropdown
+      placeholder={`Select ${type}`}
+      fluid
+      search
+      selection
+      onChange={handleChange}
+      options={data}
+      disabled={data.length === 0 ? true : false}
+    />
+  );
+};
 
 export default DropDownMenu;
