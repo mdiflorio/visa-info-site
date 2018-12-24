@@ -81,6 +81,7 @@ class App extends Component {
             type="country"
             handleChange={this.handleCountryChange}
             data={countriesList}
+            loading={loadingCountriesList}
           />
           <br />
           <div className="btnContainer">
