@@ -1,0 +1,23 @@
+button {
+  padding: 0.7em;
+  width: 200px;
+  border-radius: 5px;
+  border: none;
+  background: #ee786b;
+  cursor: pointer;
+  outline: none;
+
+  color: white;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  transition-duration: 100ms;
+
+  &:hover {
+    background: #e56960;
+    transition: 100ms linear;
+  }
+
+  &:active {
+    background: #d06058;
+  }
+}

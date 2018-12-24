@@ -4,6 +4,7 @@ import DropDownMenu from "./components/DropDownMenu";
 import * as Api from "./modules/api";
 
 import nationalityList from "./assets/nationalityList";
+import { getCountryCode } from "./assets/countryCodes";
 
 class App extends Component {
   constructor() {
@@ -24,29 +25,42 @@ class App extends Component {
       country: "",
       nationalities,
       countriesData: [],
-      countriesList: []
+      countriesList: [],
+      loadingCountriesList: false
     };
   }
 
   handleNationalityChange = (e, { value }) => {
-    this.setState({ nationality: value });
+    this.setState({
+      nationality: value,
+      countryData: [],
+      countriesList: [],
+      loadingCountriesList: true
+    });
     Api.fetchListOfCountries(value).then(countriesData => {
       let countriesList = [];
       for (let i in countriesData) {
+        const flag = getCountryCode(countriesData[i].country);
+
         countriesList.push({
-          key: countriesData[i].country,
-          value: countriesData[i].country,
+          key: i + countriesData[i].country,
+          value: i,
+          flag,
           text: countriesData[i].country
         });
       }
-      this.setState({ countriesData, countriesList });
+      this.setState({
+        countriesData,
+        countriesList,
+        loadingCountriesList: false
+      });
     });
   };
 
   handleCountryChange = (e, { value }) => this.setState({ country: value });
 
   render() {
-    const { nationalities, countriesList } = this.state;
+    const { nationalities, countriesList, loadingCountriesList } = this.state;
     return (
       <div className="App">
         <div className="container">
