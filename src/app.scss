@@ -17,9 +17,21 @@
       font-size: 2em;
     }
 
+    h3 {
+      color: #ec6f66;
+      font-family: "Raleway", sans-serif;
+      // font-size: 1.2em;
+    }
+
     .subheader {
       color: rgba(0, 0, 0, 0.87);
       font-size: 1em;
+    }
+
+    .btnContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
