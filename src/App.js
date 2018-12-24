@@ -70,13 +70,14 @@ class App extends Component {
             Select a nationality, then choose a country to view the country's
             visa requirements for that nationality.
           </div>
-          <br />
+          <h3>Nationality</h3>
           <DropDownMenu
             type="nationality"
             handleChange={this.handleNationalityChange}
             data={nationalities}
+            loading={false}
           />
-          <br />
+          <h3>Country</h3>
           <DropDownMenu
             type="country"
             handleChange={this.handleCountryChange}
