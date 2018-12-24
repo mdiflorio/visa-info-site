@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./app.scss";
 import DropDownMenu from "./components/DropDownMenu";
+import Button from "./components/Button";
 import * as Api from "./modules/api";
 
 import nationalityList from "./assets/nationalityList";
@@ -81,6 +82,11 @@ class App extends Component {
             handleChange={this.handleCountryChange}
             data={countriesList}
           />
+          <br />
+          <div className="btnContainer">
+            <Button text="Submit" />
+          </div>
+          <br />
         </div>
       </div>
     );
