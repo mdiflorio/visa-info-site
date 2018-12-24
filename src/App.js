@@ -12,7 +12,7 @@ class App extends Component {
     super();
 
     let nationalities = [];
-
+    // Format nationality list for dropdown
     nationalityList.forEach(nationality => {
       nationalities.push({
         key: nationality,
@@ -32,17 +32,21 @@ class App extends Component {
   }
 
   handleNationalityChange = (e, { value }) => {
+    // Set loading and reset old values.
     this.setState({
       nationality: value,
       countryData: [],
       countriesList: [],
       loadingCountriesList: true
     });
+
+    // Fetch from API.
     Api.fetchListOfCountries(value).then(countriesData => {
       let countriesList = [];
+
+      // Organise data for dropdown.
       for (let i in countriesData) {
         const flag = getCountryCode(countriesData[i].country);
-
         countriesList.push({
           key: i + countriesData[i].country,
           value: i,
@@ -50,6 +54,8 @@ class App extends Component {
           text: countriesData[i].country
         });
       }
+
+      // Update state and stop loading
       this.setState({
         countriesData,
         countriesList,
