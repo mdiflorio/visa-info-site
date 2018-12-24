@@ -1,7 +1,7 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
-const DropDownMenu = ({ handleChange, type, data }) => {
+const DropDownMenu = ({ handleChange, type, data, loading }) => {
   return (
     <Dropdown
       placeholder={`Select ${type}`}
@@ -11,6 +11,7 @@ const DropDownMenu = ({ handleChange, type, data }) => {
       onChange={handleChange}
       options={data}
       disabled={data.length === 0 ? true : false}
+      loading={loading}
     />
   );
 };
