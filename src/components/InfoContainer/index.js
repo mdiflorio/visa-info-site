@@ -17,14 +17,14 @@ const InfoContainer = ({ data }) => {
           </div>
         </div>
         {info.duration !== "" && (
-          <div>
+          <div className="info">
             <h3>Duration</h3>
             <p>{info.duration}</p>
           </div>
         )}
 
         {info.note !== "" && (
-          <div>
+          <div className="info">
             <h3>Note:</h3>
             <p>{info.note}</p>
           </div>
