@@ -1,0 +1,23 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.visaTypeContainer {
+  display: flex;
+  justify-content: center;
+  .circle-container {
+    display: flex;
+    align-items: center;
+    .circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+    }
+  }
+
+  h3 {
+    margin: 0 0 0 10px;
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+}

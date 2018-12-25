@@ -5,7 +5,9 @@ import Button from "./components/Button";
 import * as Api from "./modules/api";
 
 import nationalityList from "./assets/nationalityList";
-import { getCountryCode } from "./assets/countryCodes";
+import { getCountryCode } from "./helpers/countryCodes";
+import InfoContainer from "./components/InfoContainer";
+import { Loader } from "semantic-ui-react";
 
 class App extends Component {
   constructor() {
@@ -27,6 +29,11 @@ class App extends Component {
       nationalities,
       countriesData: [],
       countriesList: [],
+      selected: {
+        nationality: "",
+        info: null
+      },
+      loadingInfoContainer: false,
       loadingCountriesList: false
     };
   }
@@ -66,8 +73,32 @@ class App extends Component {
 
   handleCountryChange = (e, { value }) => this.setState({ country: value });
 
+  handleSubmit = () => {
+    this.setState({
+      loadingInfoContainer: true,
+      selected: {
+        nationality: "",
+        info: null
+      }
+    });
+
+    const selected = {
+      nationality: this.state.nationality,
+      info: this.state.countriesData[this.state.country]
+    };
+    setTimeout(() => {
+      this.setState({ selected, loadingInfoContainer: false });
+    }, 500);
+  };
+
   render() {
-    const { nationalities, countriesList, loadingCountriesList } = this.state;
+    const {
+      nationalities,
+      countriesList,
+      loadingCountriesList,
+      loadingInfoContainer,
+      selected
+    } = this.state;
     return (
       <div className="App">
         <div className="container">
@@ -92,9 +123,18 @@ class App extends Component {
           />
           <br />
           <div className="btnContainer">
-            <Button text="Submit" />
+            <Button text="Submit" onClick={this.handleSubmit} />
           </div>
           <br />
+
+          {loadingInfoContainer && (
+            <div className="center">
+              <Loader inline active>
+                Loading
+              </Loader>
+            </div>
+          )}
+          {selected.info && <InfoContainer data={selected} />}
         </div>
       </div>
     );
