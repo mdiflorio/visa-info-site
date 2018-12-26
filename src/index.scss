@@ -1,8 +1,9 @@
-body {
+html {
   // margin: 0;
-  // padding: 0;
-  width: 100%;
-
+  // background-repeat: no-repeat;
+  height: 100%;
+}
+body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -23,6 +24,12 @@ body {
     #f3a183 90%
   ); /* Opera 11.10+ */
   background: linear-gradient(90deg, #ec6f66 10%, #f3a183 90%); /* W3C */
+
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   font-family: "Raleway", sans-serif;
   font-size: 20px;
 }
