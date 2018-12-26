@@ -24,17 +24,22 @@ class App extends Component {
     });
 
     this.state = {
-      nationality: "",
-      country: "",
-      nationalities,
-      countriesData: [],
-      countriesList: [],
-      selected: {
+      inputs: {
         nationality: "",
+        country: ""
+      },
+      nationalities,
+      countries: {
+        info: [],
+        names: []
+      },
+      selected: {
         info: null
       },
-      loadingInfoContainer: false,
-      loadingCountriesList: false
+      loading: {
+        infoContainer: false,
+        countriesList: false
+      }
     };
   }
 
@@ -42,63 +47,79 @@ class App extends Component {
     // Set loading and reset old values.
     this.setState({
       nationality: value,
-      countryData: [],
-      countriesList: [],
-      loadingCountriesList: true
+      countries: {
+        info: [],
+        names: []
+      },
+      loading: {
+        ...this.state.loading,
+        countriesList: true
+      }
     });
 
     // Fetch from API.
-    Api.fetchListOfCountries(value).then(countriesData => {
-      let countriesList = [];
+    Api.fetchListOfCountries(value).then(info => {
+      let countryNames = [];
 
       // Organise data for dropdown.
-      for (let i in countriesData) {
-        const flag = getCountryCode(countriesData[i].country);
-        countriesList.push({
-          key: i + countriesData[i].country,
+      for (let i in info) {
+        const flag = getCountryCode(info[i].country);
+        countryNames.push({
+          key: i + info[i].country,
           value: i,
           flag,
-          text: countriesData[i].country
+          text: info[i].country
         });
       }
 
       // Update state and stop loading
       this.setState({
-        countriesData,
-        countriesList,
-        loadingCountriesList: false
+        countries: {
+          info,
+          names: countryNames
+        },
+        loading: {
+          ...this.state.loading,
+          countriesList: false
+        }
       });
     });
   };
 
-  handleCountryChange = (e, { value }) => this.setState({ country: value });
+  handleCountryChange = (e, { value }) =>
+    this.setState({ inputs: { ...this.state.inputs, country: value } });
 
   handleSubmit = () => {
+    const { loading, countries, inputs } = this.state;
+    // Show loading.
     this.setState({
-      loadingInfoContainer: true,
+      loading: {
+        ...loading,
+        infoContainer: true
+      },
       selected: {
-        nationality: "",
         info: null
       }
     });
 
     const selected = {
-      nationality: this.state.nationality,
-      info: this.state.countriesData[this.state.country]
+      info: countries.info[inputs.country]
     };
+    console.log(inputs);
+
     setTimeout(() => {
-      this.setState({ selected, loadingInfoContainer: false });
-    }, 500);
+      this.setState({
+        selected,
+        loading: {
+          ...this.state.loading,
+          infoContainer: false
+        }
+      });
+    }, 400);
   };
 
   render() {
-    const {
-      nationalities,
-      countriesList,
-      loadingCountriesList,
-      loadingInfoContainer,
-      selected
-    } = this.state;
+    const { nationalities, countries, loading, selected } = this.state;
     return (
       <div className="App">
         <div className="container">
@@ -118,8 +139,8 @@ class App extends Component {
           <DropDownMenu
             type="country"
             handleChange={this.handleCountryChange}
-            data={countriesList}
-            loading={loadingCountriesList}
+            data={countries.names}
+            loading={loading.countriesList}
           />
           <br />
           <div className="btnContainer">
@@ -127,7 +148,7 @@ class App extends Component {
           </div>
           <br />
 
-          {loadingInfoContainer && (
+          {loading.infoContainer && (
             <div className="center">
               <Loader inline active>
                 Loading
