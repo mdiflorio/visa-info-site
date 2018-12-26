@@ -1,5 +1,5 @@
 export function getVisaRestrictionColor(visaRestriction) {
-  switch (visaRestriction) {
+  switch (visaRestriction.trim()) {
     case "Freedom of movement":
       return "#0074D9"; // Blue
     case "Visa not required":
@@ -11,6 +11,7 @@ export function getVisaRestrictionColor(visaRestriction) {
     case "eVisa / Visa on arrival":
     case "Visitor's Permit on arrival":
     case "Electronic Entry Visa":
+    case "eVisitor":
       return "#FF851B"; // Yellow
     default:
       return "#001f3f"; // Navy
